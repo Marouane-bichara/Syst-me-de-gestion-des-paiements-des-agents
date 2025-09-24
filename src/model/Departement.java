@@ -7,7 +7,7 @@ public class Departement {
     private String name;
     private Agent responsable;
     private ArrayList<Agent> agents;
-
+ 
     public Departement(int id, String name, Agent responsable, ArrayList<Agent> agents) {
         this.id = id;
         this.name = name;
