@@ -9,11 +9,13 @@ public class AuthView {
 
     private Scanner scanner;
     private LoginResponsableDepartement loginResponsableDepartement;
+    private LoginDirecteurView loginDirecteurView;
 
     public AuthView()
     {
         this.scanner = new Scanner(System.in);
         this.loginResponsableDepartement = new LoginResponsableDepartement();
+        this.loginDirecteurView = new LoginDirecteurView();
     }
 
     public void authView()
@@ -47,6 +49,7 @@ public class AuthView {
                     loginResponsableDepartement.LoginRespo();
                     break;
                 case 2:
+                    loginDirecteurView.LoginDirec();
                     break;
                 case 3:
                     break;

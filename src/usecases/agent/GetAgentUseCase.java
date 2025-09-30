@@ -1,15 +1,15 @@
 package usecases.agent;
 
 import model.Agent;
-import service.agent.AgentService;
+import service.responsable.ResponsableService;
 
 public class GetAgentUseCase {
 
-    private AgentService agentService;
+    private ResponsableService agentService;
 
     public GetAgentUseCase()
     {
-        this.agentService = new AgentService();
+        this.agentService = new ResponsableService();
     }
 
 

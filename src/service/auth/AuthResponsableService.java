@@ -19,14 +19,14 @@ public class AuthResponsableService {
     }
 
 
-    public Agent authDirectur (String email , String password) {
+    public Agent authResponsable (String email , String password) {
         Agent agent = agentDao.authResponsable(email , password);
 
         if(agent == null) {
             return null;
         }
 
-        if(!agent.getTypeAgent().name().equals("DIRECTEUR")) {
+        if(!agent.getTypeAgent().name().equals("RESPONSABLE_DEPARTEMENT")) {
             return null;
         }
 

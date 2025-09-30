@@ -48,7 +48,8 @@ public class AgentView {
             System.out.println("3. Delete Agent.");
             System.out.println("4. Affiche Agent.");
             System.out.println("5. Affiche all Agents.");
-            System.out.println("6. Exite");
+            System.out.println("6. Payer un Agent.");
+            System.out.println("7. Exite");
             System.out.print("Enter your choice : ");
 
             choice = scanner.nextInt();
@@ -74,6 +75,8 @@ public class AgentView {
                     afficheAgWDepView.affichAgents(agent);
                     break;
                 case 6:
+                    break;
+                case 7:
                     System.exit(0);
             }
 

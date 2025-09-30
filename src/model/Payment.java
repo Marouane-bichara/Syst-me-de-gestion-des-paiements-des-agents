@@ -4,24 +4,20 @@ import java.util.Date;
 
 public class Payment {
     private int id;
-    private TypePyment typePyment;
+    private TypePyment type;
     private double amount;
-    private Date date;
+    private Date datePaiement;
     private String motif;
     private Agent agent;
-    private String typePrime;
-    private double salairBase;
-    private boolean conditionValidee;
+    private int conditionValidee;
 
-    public Payment(Date date, int id, TypePyment typePyment, double amount, String motif, Agent agent,String typePrime, double salairBase, boolean conditionValidee) {
-        this.date = date;
+    public Payment(Date datePaiement, int id, TypePyment type, double amount, String motif, Agent agent, int conditionValidee) {
+        this.datePaiement = datePaiement;
         this.id = id;
-        this.typePyment = typePyment;
+        this.type = type;
         this.amount = amount;
         this.motif = motif;
         this.agent = agent;
-        this.typePrime = typePrime;
-        this.salairBase = salairBase;
         this.conditionValidee = conditionValidee;
     }
 
@@ -34,11 +30,11 @@ public class Payment {
     }
 
     public TypePyment getTypePyment() {
-        return typePyment;
+        return type;
     }
 
-    public void setTypePyment(TypePyment typePyment) {
-        this.typePyment = typePyment;
+    public void setTypePyment(TypePyment type) {
+        this.type = type;
     }
 
     public double getAmount() {
@@ -50,11 +46,11 @@ public class Payment {
     }
 
     public Date getDate() {
-        return date;
+        return datePaiement;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(Date datePaiement) {
+        this.datePaiement = datePaiement;
     }
 
     public String getMotif() {
@@ -73,27 +69,12 @@ public class Payment {
         this.agent = agent;
     }
 
-    public String getTypePrime() {
-        return typePrime;
-    }
 
-    public void setTypePrime(String typePrime) {
-        this.typePrime = typePrime;
-    }
-
-    public double getSalairBase() {
-        return salairBase;
-    }
-
-    public void setSalairBase(double salairBase) {
-        this.salairBase = salairBase;
-    }
-
-    public boolean isConditionValidee() {
+    public int isConditionValidee() {
         return conditionValidee;
     }
 
-    public void setConditionValidee(boolean conditionValidee) {
+    public void setConditionValidee(int conditionValidee) {
         this.conditionValidee = conditionValidee;
     }
 
@@ -102,13 +83,11 @@ public class Payment {
     public String toString() {
         return "Payment{" +
                 "id=" + id +
-                ", typePyment=" + typePyment +
+                ", typePyment=" + type +
                 ", amount=" + amount +
-                ", date=" + date +
+                ", date=" + datePaiement +
                 ", motif='" + motif + '\'' +
                 ", agent=" + agent +
-                ", typePrime='" + typePrime + '\'' +
-                ", salairBase=" + salairBase +
                 ", conditionValidee=" + conditionValidee +
                 '}';
     }

@@ -1,14 +1,14 @@
 package usecases.agent;
 
-import service.agent.AgentService;
+import service.responsable.ResponsableService;
 
 public class DeleteAgentUseCase {
 
-    private AgentService agentService;
+    private ResponsableService agentService;
 
     public DeleteAgentUseCase()
     {
-        this.agentService = new AgentService();
+        this.agentService = new ResponsableService();
     }
 
     public String deleteAgentById(int id)

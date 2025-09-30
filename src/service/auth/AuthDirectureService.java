@@ -17,14 +17,14 @@ public class AuthDirectureService {
     }
 
 
-    public Agent authResponsable (String email , String password) {
-        Agent agent = agentDao.authResponsable(email , password);
+    public Agent authDirecteur (String email , String password) {
+        Agent agent = agentDao.authDirecture(email , password);
 
         if(agent == null) {
             return null;
         }
 
-        if(!agent.getTypeAgent().name().equals("RESPONSABLE_DEPARTEMENT")) {
+        if(!agent.getTypeAgent().name().equals("DIRECTEUR")) {
             return null;
         }
 

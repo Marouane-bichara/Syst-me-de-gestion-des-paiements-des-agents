@@ -18,7 +18,8 @@ public interface IAgentDao {
     List<Agent> getAllAgents();
     List<Agent> getAllAgentsWithoutDepartements();
     Agent authResponsable(String email , String password);
-
+    Agent authDirecture(String email , String password);
+    List<Agent> getAgentsBydepartement(String name);
 
 
 
