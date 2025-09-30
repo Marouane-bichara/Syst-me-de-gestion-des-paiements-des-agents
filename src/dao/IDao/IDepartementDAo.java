@@ -10,6 +10,7 @@ public interface IDepartementDAo {
     Departement getDepatrmentById(int id);
     Departement getDepartementByName(String name);
     int DeleteDepartementByname(String name);
+
 //    void updateDepartement(Departement departement);
 //    void deleteDepartement(int id);
 //
