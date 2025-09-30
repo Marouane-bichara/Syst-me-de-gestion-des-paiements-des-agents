@@ -18,9 +18,9 @@ public class DepartementDAO implements IDepartementDAo {
 
     public void addDepartement(Departement departement){
         String sql = "INSERT INTO departements (name) VALUES (?)";
-        try (Connection conn = DbConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+        try{
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, departement.getName());
 
 
@@ -32,13 +32,15 @@ public class DepartementDAO implements IDepartementDAo {
         }
     }
 
+
+
     public List<Departement> getAllDepartements(){
         List<Departement> departements = new ArrayList<>();
 
         String sql = "SELECT * FROM departements";
-        try (Connection conn = DbConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+        try {
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet resultSet = stmt.executeQuery();
             System.out.println(resultSet.getClass());
             while(resultSet.next())

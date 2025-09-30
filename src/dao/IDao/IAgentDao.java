@@ -1,6 +1,7 @@
 package dao.IDao;
 
 import model.Agent;
+import model.Departement;
 import model.Payment;
 import model.TypeAgent;
 
@@ -9,14 +10,25 @@ import java.util.Optional;
 
 public interface IAgentDao {
     int addAgent(Agent agent);
-//    List<Agent> getAllAgents();
     int updateAgent(Agent agent);
     int deleteAgentbyId(int id);
     Agent getAgentById(int agentId);
-//
-//    List<Agent> getAgentsByDepartement(int idDepartement);
     int assignAgentToDepartement(int agentId, int departementId);
-//
+    Agent getAgentBynameAndlastname( String lastname , String name );
+    List<Agent> getAllAgents();
+    List<Agent> getAllAgentsWithoutDepartements();
+    Agent authResponsable(String email , String password);
+
+
+
+
+
+
+//    List<Agent> getAllAgents();
+
+    //
+//    List<Agent> getAgentsByDepartement(int idDepartement);
+    //
 //    List<Agent> getAgentsByType(TypeAgent type);
 //
 //    void addPaymentToAgent(int agentId, Payment payment);
