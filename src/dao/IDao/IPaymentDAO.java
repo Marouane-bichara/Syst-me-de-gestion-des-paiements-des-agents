@@ -6,10 +6,10 @@ import model.TypePyment;
 import java.util.List;
 
 public interface IPaymentDAO {
-    void addPayment(Payment payment);
+    int addPayment(Payment payment);
     List<Payment> getAllPayments();
-    void updatePayment(Payment payment);
-    void deletePayment(int id);
+    int updatePayment(Payment payment);
+    int deletePayment(int id);
 
     List<Payment> getPaymentsByType(TypePyment type);
     List<Payment> getPaymentsByAgent(int agentId);

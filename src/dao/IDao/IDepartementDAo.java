@@ -5,7 +5,7 @@ import model.Departement;
 import java.util.List;
 
 public interface IDepartementDAo {
-    void addDepartement(Departement departement);
+    int addDepartement(Departement departement);
     List<Departement> getAllDepartements();
     Departement getDepatrmentById(int id);
     Departement getDepartementByName(String name);

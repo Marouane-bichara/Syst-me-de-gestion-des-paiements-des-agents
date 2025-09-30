@@ -1,16 +1,16 @@
 package usecases.agent;
 
 import model.Agent;
-import service.agent.AgentService;
+import service.responsable.ResponsableService;
 
 import java.util.List;
 
 public class GetAgentsWdepUseCase {
-    private AgentService agentService;
+    private ResponsableService agentService;
 
     public GetAgentsWdepUseCase()
     {
-        this.agentService = new AgentService();
+        this.agentService = new ResponsableService();
     }
 
 

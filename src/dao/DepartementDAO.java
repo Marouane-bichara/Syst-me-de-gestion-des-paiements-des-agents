@@ -16,7 +16,7 @@ import java.util.List;
 public class DepartementDAO implements IDepartementDAo {
 
 
-    public void addDepartement(Departement departement){
+    public int addDepartement(Departement departement){
         String sql = "INSERT INTO departements (name) VALUES (?)";
         try{
             Connection conn = DbConnection.getConnection();
@@ -24,7 +24,8 @@ public class DepartementDAO implements IDepartementDAo {
             stmt.setString(1, departement.getName());
 
 
-            stmt.executeUpdate();
+            int rows = stmt.executeUpdate();
+            return rows;
 
         } catch (SQLException e) {
             e.printStackTrace();

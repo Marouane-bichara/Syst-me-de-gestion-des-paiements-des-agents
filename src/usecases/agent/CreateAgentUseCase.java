@@ -1,14 +1,14 @@
 package usecases.agent;
 
-import service.agent.AgentService;
+import service.responsable.ResponsableService;
 
 public class CreateAgentUseCase {
 
-        private AgentService agentService;
+        private ResponsableService agentService;
 
         public CreateAgentUseCase()
         {
-            this.agentService = new AgentService();
+            this.agentService = new ResponsableService();
         }
 
         public String addAgent(String nom, String prenom, String email,String motDePasse, String type , String departementName , int id)

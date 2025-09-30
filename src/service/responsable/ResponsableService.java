@@ -1,4 +1,4 @@
-package service.agent;
+package service.responsable;
 
 import dao.AgentDAOImpl;
 import dao.DepartementDAO;
@@ -11,12 +11,12 @@ import model.TypeAgent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgentService {
+public class ResponsableService {
 
     private  IAgentDao agentDao;
     private IDepartementDAo departementDAo;
 
-    public AgentService()
+    public ResponsableService()
     {
         this.agentDao = new AgentDAOImpl();
         this.departementDAo = new DepartementDAO();

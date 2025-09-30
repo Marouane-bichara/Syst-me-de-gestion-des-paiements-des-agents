@@ -1,7 +1,6 @@
 package usecases.departement;
 
 import model.Departement;
-import service.agent.AgentService;
 import service.departement.DepartementService;
 
 import java.util.List;

@@ -251,6 +251,32 @@ public class AgentDAOImpl implements IAgentDao {
     }
 
 
+    public Agent authDirecture(String email , String password)
+    {
+        String sql = "select * from agents where email = ? and motDePasse = ? ";
+
+        try{
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+
+            DepartementDAO departementDAO = new DepartementDAO();
+
+            if(rs.next())
+            {
+                Agent agent = new Agent(rs.getString("nom") , rs.getString("prenom") , rs.getString("email") , rs.getString("motDePasse") , rs.getInt("id") , TypeAgent.valueOf(rs.getString("type")) , null , new ArrayList<>());
+                return agent;
+            }
+            return null;
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException("Error getting this agent",e);
+        }
+    }
+
     public Agent authResponsable(String email , String password){
 
         String sql = "select * from agents where email = ? and motDePasse = ? ";
@@ -279,7 +305,32 @@ public class AgentDAOImpl implements IAgentDao {
         }
     }
 
+    public List<Agent> getAgentsBydepartement(String name)
+    {
+        List<Agent> agents = new ArrayList<>();
+       String sql = "select * from agents inner join departements on departements.id = agents.departement_id where departements.name = ?";
+       try{
+           Connection conn = DbConnection.getConnection();
+           PreparedStatement stmt = conn.prepareStatement(sql);
 
+           stmt.setString(1 , name);
+           ResultSet rs =  stmt.executeQuery();
+
+           while(rs.next())
+           {
+               Departement dep = new Departement(rs.getInt("id") , rs.getString("name") , new ArrayList<>());
+               Agent agent = new Agent(rs.getString("nom") , rs.getString("prenom") , rs.getString("email") , rs.getString("motDePasse") , rs.getInt("id") , TypeAgent.valueOf(rs.getString("type")) , dep , new ArrayList<>());
+               agents.add(agent);
+           }
+
+           return agents;
+
+       }catch(SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException("Error Getting agents from this departement" , e);
+        }
+    }
 
 
 }

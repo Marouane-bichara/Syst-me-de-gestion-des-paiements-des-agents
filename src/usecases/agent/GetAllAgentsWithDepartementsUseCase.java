@@ -1,16 +1,16 @@
 package usecases.agent;
 
 import model.Agent;
-import service.agent.AgentService;
+import service.responsable.ResponsableService;
 
 import java.util.List;
 
 public class GetAllAgentsWithDepartementsUseCase {
-    private AgentService agentService;
+    private ResponsableService agentService;
 
     public GetAllAgentsWithDepartementsUseCase()
     {
-        this.agentService = new AgentService();
+        this.agentService = new ResponsableService();
     }
 
     public List<Agent> getAllAgentsWithoutDepartements(){
