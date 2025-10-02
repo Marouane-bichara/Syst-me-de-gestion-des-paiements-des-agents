@@ -4,8 +4,11 @@ import dao.AgentDAOImpl;
 import dao.DepartementDAO;
 import dao.IDao.IAgentDao;
 import dao.IDao.IDepartementDAo;
+import dao.IDao.IPaymentDAO;
+import dao.PaymentDAOImpl;
 import model.Agent;
 import model.Departement;
+import model.Payment;
 import model.TypeAgent;
 
 import java.util.ArrayList;
@@ -15,11 +18,13 @@ public class ResponsableService {
 
     private  IAgentDao agentDao;
     private IDepartementDAo departementDAo;
+    private IPaymentDAO paymentDAO;
 
     public ResponsableService()
     {
         this.agentDao = new AgentDAOImpl();
         this.departementDAo = new DepartementDAO();
+        this.paymentDAO = new PaymentDAOImpl();
     }
 
     public String addAgent(String nom, String prenom, String email,String motDePasse, String type , String departementName , int id){
@@ -106,5 +111,46 @@ public class ResponsableService {
         return agentDao.getAllAgents();
     }
 
+
+    public String addPaymentToAgent(Payment payment)
+    {
+        int rs = paymentDAO.addPayment(payment);
+        if(rs == 0)
+        {
+            return "Payment didnt added.";
+        }else{
+            return "Payment added.";
+        }
+    }
+
+    public String updatePayment(Payment payment)
+    {
+        int rs = paymentDAO.updatePayment(payment);
+        if(rs == 0)
+        {
+            return "Payment didnt updated.";
+        }else{
+            return "Payment Updated.";
+        }
+    }
+
+    public Payment getPaymentById(int id)
+    {
+        Payment rs = paymentDAO.getPaymentById(id);
+        return rs;
+    }
+
+
+    public String deletePayment(int id)
+    {
+        int rs = paymentDAO.deletePayment(id);
+
+        if(rs == 0)
+        {
+            return "Payment didnt delete";
+        }else {
+            return "Payment Deleted";
+        }
+    }
 
 }

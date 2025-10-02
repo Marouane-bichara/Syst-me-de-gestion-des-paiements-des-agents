@@ -1,6 +1,5 @@
 package view.directeurView;
 
-import controller.agent.AgentController;
 import controller.deirecture.DirectureController;
 
 import java.util.Scanner;

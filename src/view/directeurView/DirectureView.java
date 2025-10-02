@@ -1,6 +1,8 @@
 package view.directeurView;
 
 import model.Agent;
+import view.agentResponsable.AddPaymentView;
+import view.agentResponsable.DeletePaymentView;
 
 import java.util.Scanner;
 
@@ -11,6 +13,11 @@ public class DirectureView {
     private CreateDepartementView createDepartementView;
     private AssignAgentToDepartementView assignAgentToDepartementView;
     private DeleteDepartementView deleteDepartementView;
+    private AddPaymentDirView addPaymentDirView;
+    private UpdatePaymentView updatePaymentView;
+    private DeletePaymentViewDirec deletePaymentView;
+    private TotalAgentsDeparementsView totalAgentsDeparementsView;
+    private DistributionPaymentTypeView distributionPaymentTypeView;
 
     private Scanner scanner;
 
@@ -22,6 +29,11 @@ public class DirectureView {
         this.scanner = new Scanner(System.in);
         this.assignAgentToDepartementView = new AssignAgentToDepartementView();
         this.deleteDepartementView = new DeleteDepartementView();
+        this.addPaymentDirView = new AddPaymentDirView();
+        this.updatePaymentView = new UpdatePaymentView();
+        this.deletePaymentView = new DeletePaymentViewDirec();
+        this.totalAgentsDeparementsView = new TotalAgentsDeparementsView();
+        this.distributionPaymentTypeView = new DistributionPaymentTypeView();
     }
 
     public void responView(Agent agent)
@@ -45,10 +57,17 @@ public class DirectureView {
             System.out.println("3. Create Departement.");
             System.out.println("4. Assign agent to departement.");
             System.out.println("5. Delete Departement.");
-            System.out.println("7. Exite.");
+            System.out.println("6. Payer un responsable.");
+            System.out.println("7. Update Payment.");
+            System.out.println("8. Delete Payment.");
+            System.out.println("9. Total number of agents and departments.");
+            System.out.println("10. Distribution of payments by type (percentage SALAIRE / PRIME / BONUS / INDEMNITE.");
+            System.out.println("11. Total number of agents and departments.");
+            System.out.println("12. Exite.");
             System.out.print("Enter your choice : ");
             choice = scanner.nextInt();
             scanner.nextLine();
+
 
             switch(choice)
             {
@@ -67,7 +86,21 @@ public class DirectureView {
                 case 5:
                     deleteDepartementView.deleteDepartement();
                     break;
+                case 6:
+                    addPaymentDirView.addPayment();
+                    break;
                 case 7:
+                    updatePaymentView.updatePayment();
+                    break;
+                case 8:
+                    deletePaymentView.deletePayment();
+                    break;
+                case 9:
+                    totalAgentsDeparementsView.totalAgentsAndDepartements();
+                    break;
+                case 10 : distributionPaymentTypeView.distributionPaymentType();
+                        break;
+                case 12:
                     System.exit(0);
             }
         }

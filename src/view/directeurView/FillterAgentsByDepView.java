@@ -1,6 +1,6 @@
 package view.directeurView;
 
-import controller.agent.AgentController;
+import controller.agent.ResponsableController;
 import controller.deirecture.DirectureController;
 import controller.departement.DepartementController;
 import model.Agent;
@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FillterAgentsByDepView {
-    private AgentController agentController;
+    private ResponsableController agentController;
     private DepartementController departementController;
     private DirectureController directureController;
     private Scanner scanner;
 
     public FillterAgentsByDepView()
     {
-        this.agentController = new AgentController();
+        this.agentController = new ResponsableController();
         this.departementController = new DepartementController();
         this.directureController = new DirectureController();
         this.scanner = new Scanner(System.in);

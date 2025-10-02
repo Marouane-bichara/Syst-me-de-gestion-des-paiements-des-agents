@@ -11,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DepartementDAO implements IDepartementDAo {
 
@@ -149,5 +151,30 @@ public class DepartementDAO implements IDepartementDAo {
             e.printStackTrace();
             throw new RuntimeException("error deleting an an departement");
         }
+    }
+
+    public Map<String , Integer> getAllDepartementsWitTotal(){
+
+        Map<String , Integer>  totalAgentsFromDep = new HashMap<>();
+
+        String sql = "select departements.name , count(agents.departement_id) as totalAgents FROM departements join agents on agents.departement_id = departements.id GROUP BY agents.departement_id";
+
+        try{
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next())
+            {
+                totalAgentsFromDep.put(rs.getString("name") , rs.getInt("totalAgents"));
+            }
+            return totalAgentsFromDep;
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException( "Error while getting the total agents from every single departement.", e);
+        }
+
     }
 }
