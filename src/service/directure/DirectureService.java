@@ -2,21 +2,29 @@ package service.directure;
 
 import dao.AgentDAOImpl;
 import dao.DepartementDAO;
+import dao.PaymentDAOImpl;
 import model.Agent;
 import model.Departement;
+import model.Payment;
 import model.TypeAgent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DirectureService {
 
     private AgentDAOImpl agentDAO;
     private DepartementDAO departementDAO;
+    private PaymentDAOImpl paymentDAO;
+
+
+
     public DirectureService()
     {
         this.agentDAO = new AgentDAOImpl();
         this.departementDAO = new DepartementDAO();
+        this.paymentDAO = new PaymentDAOImpl();
     }
 
 
@@ -71,6 +79,78 @@ public class DirectureService {
        else {
            return "Departement deleted";
        }
+    }
+
+
+    public String addPaymentToDirecture(Payment payment)
+    {
+        int rs = paymentDAO.addPayment(payment);
+        if(rs == 0)
+        {
+            return "Payment didnt added.";
+        }else{
+            return "Payment added.";
+        }
+    }
+
+    public Payment getPaymentById(int id)
+    {
+        Payment rs = paymentDAO.getPaymentById(id);
+        return rs;
+    }
+
+    public Agent getAgentByNameAndLastName(String lastname , String name  )
+    {
+        Agent agent = agentDAO.getAgentBynameAndlastname(lastname , name);
+        return  agent;
+    }
+
+
+    public String updatePayment(Payment payment)
+    {
+        int rs = paymentDAO.updatePayment(payment);
+        if(rs == 0)
+        {
+            return "Payment didnt updated.";
+        }else{
+            return "Payment Updated.";
+        }
+    }
+
+    public String deletePayment(int id)
+    {
+        int rs = paymentDAO.deletePayment(id);
+
+        if(rs == 0)
+        {
+            return "Payment didnt delete";
+        }else {
+            return "Payment Deleted";
+        }
+    }
+
+    public Map<String , Integer> getAllDepartementsWithTotal(){
+        Map<String , Integer> rs =  departementDAO.getAllDepartementsWitTotal();
+
+        return rs;
+    }
+
+
+    public int getTotalType(String type)
+    {
+        int size = paymentDAO.sizeType(type);
+        if(size == 0)
+        {
+            return 0;
+        }else{
+            return size;
+        }
+    }
+
+    public int getTotalPayments()
+    {
+        int size = paymentDAO.paymentSize();
+        return size;
     }
 
 

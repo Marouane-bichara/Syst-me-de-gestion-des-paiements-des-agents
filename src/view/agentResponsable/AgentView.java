@@ -16,6 +16,9 @@ public class AgentView {
     private AfficheAgWDepView afficheAgWDepView;
     private AfficheAllAgentWitDepView afficheAllAgentWitDepView;
     private FillterAgentsByDepView fillterAgentsByDepView;
+    private AddPaymentView addPaymentView;
+    private UpdatePaymentView updatePaymentView;
+    private DeletePaymentView deletePaymentView;
     private Scanner scanner;
 
     public AgentView()
@@ -27,6 +30,9 @@ public class AgentView {
         this.afficheAgWDepView = new AfficheAgWDepView();
         this.afficheAllAgentWitDepView = new AfficheAllAgentWitDepView();
         this.fillterAgentsByDepView = new FillterAgentsByDepView();
+        this.addPaymentView = new AddPaymentView();
+        this.updatePaymentView = new UpdatePaymentView();
+        this.deletePaymentView = new DeletePaymentView();
         this.scanner = new Scanner(System.in);
     }
 
@@ -49,7 +55,9 @@ public class AgentView {
             System.out.println("4. Affiche Agent.");
             System.out.println("5. Affiche all Agents.");
             System.out.println("6. Payer un Agent.");
-            System.out.println("7. Exite");
+            System.out.println("7. Update payment.");
+            System.out.println("8. Delete payment.");
+            System.out.println("9 Exite");
             System.out.print("Enter your choice : ");
 
             choice = scanner.nextInt();
@@ -75,8 +83,15 @@ public class AgentView {
                     afficheAgWDepView.affichAgents(agent);
                     break;
                 case 6:
+                    addPaymentView.addPaymentV(agent);
                     break;
                 case 7:
+                    updatePaymentView.updatePayment(agent);
+                    break;
+                case 8:
+                    deletePaymentView.deletePayment(agent);
+                    break;
+                case 9:
                     System.exit(0);
             }
 

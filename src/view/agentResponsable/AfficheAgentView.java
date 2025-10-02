@@ -1,17 +1,17 @@
 package view.agentResponsable;
 
-import controller.agent.AgentController;
+import controller.agent.ResponsableController;
 import model.Agent;
 
 import java.util.Scanner;
 
 public class AfficheAgentView {
-    private AgentController agentController;
+    private ResponsableController agentController;
     private Scanner scanner;
 
     public AfficheAgentView()
     {
-        this.agentController = new AgentController();
+        this.agentController = new ResponsableController();
         this.scanner = new Scanner(System.in);
     }
 

@@ -4,48 +4,91 @@ import model.Agent;
 import model.Departement;
 import model.Payment;
 import model.TypeAgent;
-import usecases.directure.AddDepartementUseCase;
-import usecases.directure.AddNewRespoDepUseCase;
-import usecases.directure.DeleteDepartementUseCase;
-import usecases.directure.GetAgentsByDepartementUseCase;
+import usecases.directure.DirectureUseCase;
+
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DirectureController {
 
-    private GetAgentsByDepartementUseCase getAgentsByDepartement;
-    private AddDepartementUseCase addDepartement;
-    private AddNewRespoDepUseCase addNewRespoDepUseCase;
-    private DeleteDepartementUseCase deleteDepartementUseCase;
-
+    private DirectureUseCase directureUseCase;
 
     public DirectureController()
     {
-        this.getAgentsByDepartement = new GetAgentsByDepartementUseCase();
-        this.addDepartement = new AddDepartementUseCase();
-        this.addNewRespoDepUseCase = new AddNewRespoDepUseCase();
-        this.deleteDepartementUseCase = new DeleteDepartementUseCase();
+        this.directureUseCase = new DirectureUseCase();
+
     }
+
+
 
     public List<Agent> getAgentsBydepartement(String name)
     {
-        return getAgentsByDepartement.getAgentsByDepartements(name);
+        return directureUseCase.getAgentsByDepartements(name);
     }
 
     public String addDepartement(String name)
     {
-        return addDepartement.addDepartement(name);
+        return directureUseCase.addDepartement(name);
     }
 
     public String addnewRespo(String nom, String prenom, String email, String motDePasse, String typeAgent, String nameDepartement)
     {
-        return  addNewRespoDepUseCase.addNewRespDep( nom,  prenom,  email,  motDePasse,  typeAgent,   nameDepartement);
+        return  directureUseCase.addNewRespDep( nom,  prenom,  email,  motDePasse,  typeAgent,   nameDepartement);
     }
 
     public String deleteDepartement(String name)
     {
-        return deleteDepartementUseCase.deleteDepartement(name);
+        return directureUseCase.deleteDepartement(name);
+    }
+
+
+    public String addPaymentToDirecture(Payment payment)
+    {
+        return directureUseCase.addPaymentToDirecture(payment);
+    }
+
+    public Agent getAgentByNameAndLastName(String lastname , String name  ){
+        return directureUseCase.getAgentByNameAndLastName(lastname , name);
+    }
+
+    public Payment getPaymentById(int id)
+    {
+        return directureUseCase.getPaymentById(id);
+    }
+
+    public String updatePayment(Payment payment)
+    {
+        return directureUseCase.updatePayment(payment);
+    }
+
+
+    public String deletePayment(int id)
+    {
+        return directureUseCase.deletePayment(id);
+    }
+
+    public Map<String , Integer> getAllDepartementsWithTotal()
+    {
+        return directureUseCase.getAllDepartementsWithoutTotal();
+    }
+
+    public int getTotalType(String type){
+        return directureUseCase.getTotalType(type);
+    }
+
+
+    public int getTotalPayments(){
+        return directureUseCase.getTotalPayments();
+    }
+
+
+    public double calculeBytotal(String type){
+        int sizeType = this.getTotalType(type);
+        int sizePayments = this.getTotalPayments();
+
+        return ((double) sizeType / sizePayments) * 100;
     }
 
 }

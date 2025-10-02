@@ -1,7 +1,5 @@
 package view.auth;
 
-import controller.agent.AgentController;
-
 import java.util.Scanner;
 
 public class AuthView {
