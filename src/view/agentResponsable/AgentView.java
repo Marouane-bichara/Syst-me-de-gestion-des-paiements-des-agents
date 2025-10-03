@@ -19,6 +19,9 @@ public class AgentView {
     private AddPaymentView addPaymentView;
     private UpdatePaymentView updatePaymentView;
     private DeletePaymentView deletePaymentView;
+    private AllPaymentsDepartementView allPaymentsDepartementView;
+    private AverageSalaryDepView averageSalaryDepView;
+    private GetAgentRankingByTPayView getAgentRankingByTPayView;
     private Scanner scanner;
 
     public AgentView()
@@ -33,6 +36,9 @@ public class AgentView {
         this.addPaymentView = new AddPaymentView();
         this.updatePaymentView = new UpdatePaymentView();
         this.deletePaymentView = new DeletePaymentView();
+        this.allPaymentsDepartementView = new AllPaymentsDepartementView();
+        this.averageSalaryDepView = new AverageSalaryDepView();
+        this.getAgentRankingByTPayView = new GetAgentRankingByTPayView();
         this.scanner = new Scanner(System.in);
     }
 
@@ -57,7 +63,10 @@ public class AgentView {
             System.out.println("6. Payer un Agent.");
             System.out.println("7. Update payment.");
             System.out.println("8. Delete payment.");
-            System.out.println("9 Exite");
+            System.out.println("9. Total payments made for the entire department.");
+            System.out.println("10. Average salary of departmental agents.");
+            System.out.println("11. Ranking of agents by total amount received (from most paid to least paid).");
+            System.out.println("12 Exite");
             System.out.print("Enter your choice : ");
 
             choice = scanner.nextInt();
@@ -92,6 +101,15 @@ public class AgentView {
                     deletePaymentView.deletePayment(agent);
                     break;
                 case 9:
+                    allPaymentsDepartementView.allPaymentsDep(agent);
+                    break;
+                case 10 :
+                    averageSalaryDepView.avergSalary(agent);
+                    break;
+                case 11:
+                    getAgentRankingByTPayView.getTheAgentsRankingByPayment(agent);
+                    break;
+                case 12:
                     System.exit(0);
             }
 

@@ -8,7 +8,7 @@ import model.Departement;
 
 import java.util.List;
 
-public class DepartementService {
+public class DepartementService  implements IDepartementService{
 
     private IDepartementDAo departementDAo;
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class DirectureService {
+public class DirectureService implements IDirectureService{
 
     private AgentDAOImpl agentDAO;
     private DepartementDAO departementDAO;
@@ -151,6 +151,62 @@ public class DirectureService {
     {
         int size = paymentDAO.paymentSize();
         return size;
+    }
+
+    public int countAgents()
+    {
+        int size = agentDAO.countAgents();
+        return size;
+    }
+
+    public int countDepartements(){
+        return departementDAO.countDepartements();
+    }
+
+    public String assignExestingAgentToDepartement (String agentName , String agentLastName , String DepartementName)
+    {
+        Departement departement = departementDAO.getDepartementByName(DepartementName);
+
+        if(departement == null)
+        {
+            System.out.println("Departement not found.");
+        }
+        Agent NewResponsableAgent = agentDAO.getAgentBynameAndlastname(agentLastName , agentName);
+
+        if(NewResponsableAgent == null)
+        {
+            return "New responsable agent not found.";
+        }
+
+
+        Agent oldAgentResponsable = agentDAO.getResponsableByDepartementID(NewResponsableAgent.getDepartement().getId());
+
+
+        oldAgentResponsable.setTypeAgent(TypeAgent.OUVRIER);
+        int rows1 = agentDAO.updateAgent(oldAgentResponsable);
+        System.out.println(oldAgentResponsable);
+
+
+        if(rows1 == 0)
+        {
+            return "probleme while updating old Responsable.";
+        }
+
+
+        NewResponsableAgent.setTypeAgent(TypeAgent.RESPONSABLE_DEPARTEMENT);
+        int rows = agentDAO.updateAgent(NewResponsableAgent);
+        System.out.println(NewResponsableAgent);
+
+
+
+        if(rows == 0)
+        {
+            return "probleme while updating new Responsable.";
+        }
+
+        return "Probleme while updating responsable";
+
+
     }
 
 

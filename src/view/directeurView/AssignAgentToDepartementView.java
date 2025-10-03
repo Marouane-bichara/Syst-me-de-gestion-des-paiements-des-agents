@@ -39,9 +39,26 @@ public class AssignAgentToDepartementView {
         switch (choice)
         {
             case 1:
+                System.out.print("Enter Agent last name : ");
+                String agentLastName = scanner.nextLine();
+
+                System.out.print("Enter agent name : ");
+                String agentname = scanner.nextLine();
+
+                System.out.print("Enter departement name : ");
+                String departementName = scanner.nextLine();
+
+
+                String rs = directureController.assignExestingAgentToDepartement(agentname , agentLastName , departementName);
+
+                System.out.println("***************");
+                System.out.println("               ");
+                System.out.println(rs);
+                System.out.println("               ");
+                System.out.println("***************");
+
                 break;
             case 2:
-//                public String addnewRespo(String nom, String prenom, String email, String motDePasse, String typeAgent, String nameDepartement)
                 System.out.print("Enter Responsable last name : ");
                 String lastNameRes = scanner.nextLine();
                 System.out.print("Enter Responsable first name : ");

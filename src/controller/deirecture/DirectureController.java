@@ -4,6 +4,7 @@ import model.Agent;
 import model.Departement;
 import model.Payment;
 import model.TypeAgent;
+import usecases.agent.ResponsableUseCase;
 import usecases.directure.DirectureUseCase;
 
 
@@ -14,10 +15,12 @@ import java.util.Map;
 public class DirectureController {
 
     private DirectureUseCase directureUseCase;
+    private ResponsableUseCase responsableUseCase;
 
     public DirectureController()
     {
         this.directureUseCase = new DirectureUseCase();
+        this.responsableUseCase = new ResponsableUseCase();
 
     }
 
@@ -90,5 +93,22 @@ public class DirectureController {
 
         return ((double) sizeType / sizePayments) * 100;
     }
+
+
+     public int countAgents()
+     {
+         return directureUseCase.countAgents();
+     }
+
+     public int countDepartements(){
+        return directureUseCase.countDepartements();
+     }
+
+
+     public String assignExestingAgentToDepartement(String agentName , String agentLastName , String DepartementName)
+     {
+          String rs = directureUseCase.assignExestingAgentToDepartement(agentName , agentLastName , DepartementName);
+          return rs;
+     }
 
 }

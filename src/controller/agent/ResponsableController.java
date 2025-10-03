@@ -5,6 +5,7 @@ import model.Payment;
 import usecases.agent.*;
 
 import java.util.List;
+import java.util.Map;
 
 public class ResponsableController {
 
@@ -69,6 +70,25 @@ public class ResponsableController {
     public String deletePayment(int id)
     {
         return responsableUseCase.deletePayment(id);
+    }
+
+    public double getTotalPaymentsByDepartment(int departmentId)
+    {
+        double rs = responsableUseCase.getTotalPaymentsByDepartment(departmentId);
+        return rs;
+    }
+
+    public double getAverageSalaryByDepartment(int departmentId){
+        double rs = responsableUseCase.getAverageSalaryByDepartment(departmentId);
+        return rs;
+    }
+
+    public Map<String, Double> getAgentsRankingByTotalPayments(Agent agent){
+        return responsableUseCase.getAgentsRankingByTotalPayments(agent);
+    }
+
+    public boolean getAgentByEmail(String email){
+        return responsableUseCase.getAgentByEmail(email);
     }
 
 }

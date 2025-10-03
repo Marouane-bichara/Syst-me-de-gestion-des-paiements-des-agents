@@ -18,6 +18,7 @@ public class DirectureView {
     private DeletePaymentViewDirec deletePaymentView;
     private TotalAgentsDeparementsView totalAgentsDeparementsView;
     private DistributionPaymentTypeView distributionPaymentTypeView;
+    private TotalAgentsAndDepartemensSecondView totalAgentsAndDepartemensSecondView;
 
     private Scanner scanner;
 
@@ -34,6 +35,7 @@ public class DirectureView {
         this.deletePaymentView = new DeletePaymentViewDirec();
         this.totalAgentsDeparementsView = new TotalAgentsDeparementsView();
         this.distributionPaymentTypeView = new DistributionPaymentTypeView();
+        this.totalAgentsAndDepartemensSecondView = new TotalAgentsAndDepartemensSecondView();
     }
 
     public void responView(Agent agent)
@@ -100,6 +102,9 @@ public class DirectureView {
                     break;
                 case 10 : distributionPaymentTypeView.distributionPaymentType();
                         break;
+                case 11:
+                        totalAgentsAndDepartemensSecondView.totalAgentsAndDepartements();
+                    break;
                 case 12:
                     System.exit(0);
             }

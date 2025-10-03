@@ -12,7 +12,7 @@ public interface IDepartementDAo {
     Departement getDepartementByName(String name);
     int DeleteDepartementByname(String name);
     Map<String , Integer> getAllDepartementsWitTotal();
-
+    int countDepartements();
 
 //    void updateDepartement(Departement departement);
 //    void deleteDepartement(int id);

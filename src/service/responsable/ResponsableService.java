@@ -13,8 +13,9 @@ import model.TypeAgent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class ResponsableService {
+public class ResponsableService  implements IResponsableService{
 
     private  IAgentDao agentDao;
     private IDepartementDAo departementDAo;
@@ -152,5 +153,26 @@ public class ResponsableService {
             return "Payment Deleted";
         }
     }
+
+    public double getTotalPaymentsByDepartment(int departmentId)
+    {
+        double rs = paymentDAO.getTotalPaymentsByDepartment(departmentId);
+        return rs;
+    }
+
+    public double getAverageSalaryByDepartment(int departmentId){
+        double rs = paymentDAO.getAverageSalaryByDepartment(departmentId);
+        return rs;
+    }
+
+    public Map<String, Double> getAgentsRankingByTotalPayments(Agent agent){
+        return paymentDAO.getAgentsRankingByTotalPayments(agent);
+    }
+
+
+    public boolean getAgentByEmail(String email){
+        return agentDao.getAgentByEmail(email);
+    }
+
 
 }

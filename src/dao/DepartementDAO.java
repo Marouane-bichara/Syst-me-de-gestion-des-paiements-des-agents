@@ -177,4 +177,27 @@ public class DepartementDAO implements IDepartementDAo {
         }
 
     }
+
+    public int countDepartements(){
+        String sql = "select COUNT(departements.id) as totalDepartements from departements";
+
+        try{
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next())
+            {
+                int size = rs.getInt("totalDepartements");
+                return size;
+            }
+            return 0;
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException("Error while getting departements count",e);
+        }
+
+    }
 }

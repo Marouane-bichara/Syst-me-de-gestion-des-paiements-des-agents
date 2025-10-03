@@ -18,5 +18,8 @@ public interface IDirectureUseCase {
     Map<String , Integer> getAllDepartementsWithoutTotal();
     int getTotalType(String type);
     int getTotalPayments();
+    int countAgents();
+    int countDepartements();
+    String assignExestingAgentToDepartement(String agentName , String agentLastName , String DepartementName);
 
 }

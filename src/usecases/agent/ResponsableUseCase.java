@@ -5,8 +5,9 @@ import model.Payment;
 import service.responsable.ResponsableService;
 
 import java.util.List;
+import java.util.Map;
 
-public class ResponsableUseCase implements IResponsableService{
+public class ResponsableUseCase implements IResponsableUseCase {
 
     private ResponsableService agentService;
 
@@ -36,6 +37,11 @@ public class ResponsableUseCase implements IResponsableService{
     {
         String value = agentService.addAgent(nom , prenom , email , motDePasse , type , departementName , id);
         return  value;
+    }
+
+    public double getAverageSalaryByDepartment(int departmentId){
+        double rs = agentService.getAverageSalaryByDepartment(departmentId);
+        return rs;
     }
 
 
@@ -68,13 +74,23 @@ public class ResponsableUseCase implements IResponsableService{
         return resault;
     }
 
-
+    public boolean getAgentByEmail(String email){
+        return agentService.getAgentByEmail(email);
+    }
     public Payment getPaymentById(int id)
     {
         Payment rs = agentService.getPaymentById(id);
         return rs;
     }
 
+    public double getTotalPaymentsByDepartment(int departmentId)
+    {
+        double rs = agentService.getTotalPaymentsByDepartment(departmentId);
+        return rs;
+    }
 
+    public Map<String, Double> getAgentsRankingByTotalPayments(Agent agent){
+        return agentService.getAgentsRankingByTotalPayments(agent);
+    }
 
 }

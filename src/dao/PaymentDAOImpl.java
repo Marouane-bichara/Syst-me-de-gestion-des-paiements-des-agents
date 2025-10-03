@@ -8,10 +8,59 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PaymentDAOImpl implements IPaymentDAO {
 
+    public double sumPaymentToAgent(int agentID){
+        String sql = "Select SUM(payments.amount) totalPaymetns from payments where payments.agent_id = ? and payments.conditionValidee = 1";
+        try{
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
 
+            stmt.setInt(1, agentID);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next())
+            {
+                return rs.getDouble("totalPaymetns");
+            }
+            return 0.0;
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException("Error while getting the sum" , e);
+        }
+    }
+
+    public List<Double> getAgentPaymentByAgentId(int agentID){
+
+        List<Double> allpaymetns = new ArrayList<>();
+        String sql = "select payments.amount AS allPayments from payments where payments.agent_id = ?";
+
+        try{
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1 , agentID);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next())
+            {
+                allpaymetns.add(rs.getDouble("allPayments"));
+            }
+            return allpaymetns;
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException("Error whil getting agent payments." , e);
+        }
+    }
 
     public int addPayment(Payment payment)
     {
@@ -157,4 +206,133 @@ public class PaymentDAOImpl implements IPaymentDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public double getTotalPaymentsByDepartment(int departmentId) {
+        String sql = "SELECT SUM(payments.amount) AS total FROM payments INNER JOIN agents ON payments.agent_id = agents.id WHERE agents.departement_id = ? AND payments.conditionValidee = 1";
+
+        try (Connection conn = DbConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, departmentId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getDouble("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
+
+    public double getAverageSalaryByDepartment(int departmentId) {
+        String sql = "SELECT AVG(payments.amount) AS average FROM payments INNER JOIN agents ON payments.agent_id = agents.id WHERE agents.departement_id = ? AND payments.conditionValidee = 1";
+
+        try (Connection conn = DbConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, departmentId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getDouble("average");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
+
+    public Map<String, Double> getAgentsRankingByTotalPayments(Agent agent) {
+        String sql = "SELECT agents.nom, agents.prenom, SUM(payments.amount) AS total FROM payments INNER JOIN agents ON payments.agent_id = agents.id WHERE payments.conditionValidee = 1 GROUP BY agents.id, agents.nom, agents.prenom ORDER BY total DESC";
+
+        Map<String, Double> ranking = new LinkedHashMap<>();
+
+        try (Connection conn = DbConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String fullName = rs.getString("nom") + " " + rs.getString("prenom");
+                double total = rs.getDouble("total");
+
+                ranking.put(fullName, total);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ranking;
+    }
+
+
+    public double getTotalAnnualSalary(int agentId) {
+        String sql = "SELECT SUM(payments.amount) AS totalAnnualSalary FROM payments INNER JOIN agents ON payments.agent_id = agents.id WHERE agents.id = ? AND payments.type = 'SALAIRE' AND YEAR(payments.datePaiement) = YEAR(CURDATE()) AND payments.conditionValidee = 1";
+
+        try (Connection conn = DbConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, agentId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getDouble("totalAnnualSalary");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
+
+    public double highestPayout(int agentId)
+    {
+        String sql = "SELECT MAX(payments.amount) as paymentMax from payments inner join agents on payments.agent_id = agents.id where agents.id = ?";
+
+        try{
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1 , agentId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next())
+            {
+                return rs.getDouble("paymentMax");
+            }
+        return 0;
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException("Error while getting the max payment" , e);
+        }
+    }
+
+    public double LowestPayout(int agentId)
+    {
+        String sql = "SELECT min(payments.amount) as paymentMax from payments inner join agents on payments.agent_id = agents.id where agents.id = ?";
+
+        try{
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1 , agentId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next())
+            {
+                return rs.getDouble("paymentMax");
+            }
+            return 0;
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException("Error while getting the max payment" , e);
+        }
+    }
+
+
+
 }
