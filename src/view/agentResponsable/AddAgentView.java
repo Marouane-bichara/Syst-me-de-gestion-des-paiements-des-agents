@@ -37,6 +37,13 @@ public class AddAgentView {
             System.out.println("Email may be invalid try again pls.");
         }
 
+        boolean agentExecite = agentController.getAgentByEmail(email);
+        if(agentExecite)
+        {
+            System.out.println("This email is already in.");
+            return;
+        }
+
         String password;
         while(true)
         {

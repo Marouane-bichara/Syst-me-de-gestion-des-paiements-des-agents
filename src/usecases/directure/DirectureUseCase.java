@@ -74,4 +74,16 @@ public class DirectureUseCase implements IDirectureUseCase{
         return directureService.getTotalPayments();
     }
 
+    public int countAgents(){
+        return directureService.countAgents();
+    }
+
+    public int countDepartements(){
+        return directureService.countDepartements();
+    }
+
+    public String assignExestingAgentToDepartement(String agentName , String agentLastName , String DepartementName){
+        return directureService.assignExestingAgentToDepartement(agentName , agentLastName , DepartementName);
+    }
+
 }

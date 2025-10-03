@@ -16,6 +16,31 @@ import java.util.List;
 public class AgentDAOImpl implements IAgentDao {
 
 
+    public boolean getAgentByEmail(String email){
+
+        String sql = "select * from agents where agents.email = ?";
+        try {
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, email);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next())
+            {
+                if(rs.getString("email").equals(email))
+                {
+                  return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+
     @Override
     public int addAgent(Agent agent){
         String sql = "INSERT INTO agents (nom, prenom,email,motDePasse, type , departement_id) VALUES (?, ?, ?, ? , ? , ?)";
@@ -37,6 +62,8 @@ public class AgentDAOImpl implements IAgentDao {
             throw new RuntimeException("Error adding agent", e);
         }
     }
+
+
     @Override
     public int updateAgent(Agent agent) {
         String sql = "UPDATE agents SET nom=?, prenom=?, email=?, motDePasse=?, type=?, departement_id=? WHERE id=?";
@@ -106,6 +133,7 @@ public class AgentDAOImpl implements IAgentDao {
     }
        
     }
+
 
 
     public Agent getAgentBynameAndlastname( String lastname , String name )
@@ -329,6 +357,98 @@ public class AgentDAOImpl implements IAgentDao {
         {
             e.printStackTrace();
             throw new RuntimeException("Error Getting agents from this departement" , e);
+        }
+    }
+
+
+    public int countAgents(){
+        String sql = "select COUNT(agents.id) as totalAgents from agents";
+
+        try{
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next())
+            {
+                int total = rs.getInt("totalAgents");
+                return total;
+            }
+            return 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while getting the total of agents." , e);
+        }
+    }
+
+    public Agent getResponsableByDepartementID(int idDepartement){
+        String sql = "select * from departements inner JOIN agents on agents.departement_id = departements.id where agents.type = \"RESPONSABLE_DEPARTEMENT\" and departements.id = 1";
+
+        try{
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            DepartementDAO departementDAO = new DepartementDAO();
+
+
+            if(rs.next())
+            {
+                int id = rs.getInt("id");
+                String nom = rs.getString("nom");
+                String prenom = rs.getString("prenom");
+                String email = rs.getString("email");
+                String motDePasse = rs.getString("motDePasse");
+                String type = rs.getString("type");
+                int departementId = rs.getInt("departement_id");
+
+                Departement dep = departementDAO.getDepatrmentById(departementId);
+
+                return new Agent(
+                        nom,
+                        prenom,
+                        email,
+                        motDePasse,
+                        id,
+                        TypeAgent.valueOf(type),
+                        dep,
+                        new ArrayList<>()
+                );
+
+            }
+            return null;
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException("Error while getting the responsable.",e);
+        }
+    }
+
+
+    public Agent authAgentNormal(String email , String password)
+    {
+        String sql = "select * from agents where email = ? and motDePasse = ? ";
+
+        try{
+            Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+
+            DepartementDAO departementDAO = new DepartementDAO();
+
+            if(rs.next())
+            {
+                Agent agent = new Agent(rs.getString("nom") , rs.getString("prenom") , rs.getString("email") , rs.getString("motDePasse") , rs.getInt("id") , TypeAgent.valueOf(rs.getString("type")) , null , new ArrayList<>());
+                return agent;
+            }
+            return null;
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException("Error getting this agent",e);
         }
     }
 

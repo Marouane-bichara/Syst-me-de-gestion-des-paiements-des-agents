@@ -19,26 +19,9 @@ public interface IAgentDao {
     List<Agent> getAllAgentsWithoutDepartements();
     Agent authResponsable(String email , String password);
     Agent authDirecture(String email , String password);
+    Agent authAgentNormal(String email , String password);
     List<Agent> getAgentsBydepartement(String name);
-
-
-
-
-
-//    List<Agent> getAllAgents();
-
-    //
-//    List<Agent> getAgentsByDepartement(int idDepartement);
-    //
-//    List<Agent> getAgentsByType(TypeAgent type);
-//
-//    void addPaymentToAgent(int agentId, Payment payment);
-//    List<Payment> getPaymentsByAgent(int agentId);
-//
-//    List<Payment> getPaymentsByAgentAndType(int agentId, String typePayment);
-//
-//    double getTotalPaymentsByAgent(int agentId);
-//    double getAveragePaymentsByAgent(int agentId);
-//
-//    List<Payment> getAnomalousPaymentsByAgent(int agentId);
+    int countAgents();
+    Agent getResponsableByDepartementID(int idDepartement);
+    boolean getAgentByEmail(String email);
 }

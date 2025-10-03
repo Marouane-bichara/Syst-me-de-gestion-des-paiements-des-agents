@@ -1,38 +1,40 @@
 package view.auth;
 
+import controller.auth.AuthAgentNormalController;
 import controller.auth.AuthDirecController;
 import model.Agent;
 import validationInput.ValidationInput;
 import view.directeurView.DirectureView;
+import view.normalAgent.NormalAgentView;
 
 import java.util.Scanner;
 
-public class LoginDirecteurView {
-
-
+public class AuthAgentView {
 
     private Scanner scanner;
     private ValidationInput validationInput;
-    private AuthDirecController authDirecController;
-    private DirectureView responsableView;
+    private AuthAgentNormalController authAgentNormalController;
+    private NormalAgentView normalAgentView;
 
-    public LoginDirecteurView()
+
+    public AuthAgentView()
     {
         this.scanner = new Scanner(System.in);
         this.validationInput = new ValidationInput();
-        this.authDirecController = new AuthDirecController();
-        this.responsableView = new DirectureView();
+        this.authAgentNormalController = new AuthAgentNormalController();
+        this.normalAgentView = new NormalAgentView();
     }
 
-
-    public void LoginDirec()
+    public void authAgent()
     {
+
         String email ;
         String password ;
         boolean isTrue = true ;
 
-        while (isTrue)
-        {
+        while (isTrue){
+
+
             System.out.println("****************************************");
             System.out.println("                                        ");
             System.out.println("Gestion d’une Banque Digitale en Java");
@@ -46,28 +48,26 @@ public class LoginDirecteurView {
             password = scanner.nextLine();
 
             String resault = validationInput.validationInput(email , password);
-
-
             if (resault.equals("Input is valid")) {
-                Agent agent = authDirecController.authDirecController(email , password);
+                Agent agent = authAgentNormalController.authAgentNormal(email , password);
+
                 if (agent == null) {
                     System.out.println("***********************************");
                     System.out.println("                                    ");
-                    System.out.println("No directer found.");
+                    System.out.println("No agent found.");
                     System.out.println("                                      ");
                     System.out.println("************************************");
                     System.out.println("                                     ");
                     System.out.println("Please try again.");
                     continue;
                 }else {
-                    responsableView.responView(agent);
+                    normalAgentView.noramlAgentView(agent);
                 }
                 break;
-            } else {
+            }else {
                 System.out.println(resault);
                 System.out.println("Please try again.");
             }
         }
     }
-
 }
