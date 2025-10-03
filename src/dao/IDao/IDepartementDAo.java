@@ -14,14 +14,5 @@ public interface IDepartementDAo {
     Map<String , Integer> getAllDepartementsWitTotal();
     int countDepartements();
 
-//    void updateDepartement(Departement departement);
-//    void deleteDepartement(int id);
-//
-//    void assignResponsable(int departementId, int agentId);
-//    List<Agent> getAgentsByDepartement(int idDepartement);
-//
-//    double getTotalPaymentsByDepartement(int idDepartement);
-//    double getAveragePaymentsByDepartement(int idDepartement);
-//
-//    List<Agent> getAgentsSortedByPayments(int idDepartement);
+
 }

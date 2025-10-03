@@ -10,7 +10,6 @@ import java.util.Map;
 public interface IPaymentDAO {
     int addPayment(Payment payment);
 
-//    List<Payment> getAllPayments();
     int updatePayment(Payment payment);
     Payment getPaymentById(int id);
     int deletePayment(int id);
@@ -24,11 +23,5 @@ public interface IPaymentDAO {
      double LowestPayout(int agentId);
     List<Double> getAgentPaymentByAgentId(int agentID);
     double sumPaymentToAgent(int agentID);
-//    List<Payment> getPaymentsByType(TypePyment type);
-//    List<Payment> getPaymentsByAgent(int agentId);
-//
-//    double getTotalPayments();
-//    double getAveragePayments();
 
-//    List<Payment> getAnomalousPayments();
 }
